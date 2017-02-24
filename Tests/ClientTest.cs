@@ -31,7 +31,7 @@ namespace HairSalon
 
     //Test for Equal override
     [Fact]
-    public void Test_Equal_ReturnsTrueIfNamesAreTheSame()
+    public void Test_EqualOverride_ReturnsTrueIfNamesAreTheSame()
     {
       //Arrange, Act
       Client firstClient = new Client("Becky",1);
@@ -42,7 +42,7 @@ namespace HairSalon
     }
 
     [Fact]
-    public void Test_Save_SavesToDatabase()
+    public void Test_NewClient_SavesToDatabase()
     {
       //Arrange
         Client testClient = new Client("Becky", 1);
@@ -54,6 +54,24 @@ namespace HairSalon
 
         //Assert
         Assert.Equal(testList, result);
+    }
+
+    [Fact]
+    public void Test_EditClient_UpdatesClientInDatabase()
+    {
+      //Arrange
+      string clientname = "Beck";
+      Client testClient = new Client(clientname, 1);
+      testClient.Save();
+      string newClientName = "Becky";
+
+      //Act
+      testClient.Update(newClientName);
+
+      string result = testClient.GetName();
+
+      //Assert
+      Assert.Equal(newClientName, result);
     }
   }
 }

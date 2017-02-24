@@ -71,10 +71,10 @@ namespace HairSalon
 
       while(rdr.Read())
       {
-        int ClientId = rdr.GetInt32(0);
-        string ClientName = rdr.GetString(1);
+        int clientId = rdr.GetInt32(0);
+        string clientName = rdr.GetString(1);
         int clientStylistId = rdr.GetInt32(2);
-        Client newClient = new Client (ClientName,clientStylistId,ClientId);
+        Client newClient = new Client (clientName,clientStylistId,clientId);
         allClients.Add(newClient);
       }
 
@@ -106,7 +106,7 @@ namespace HairSalon
 
       SqlCommand cmd = new SqlCommand("INSERT INTO clients (clientname, stylist_id) OUTPUT INSERTED.id VALUES (@ClientName, @StylistId);", conn);
 
-      SqlParameter nameParameter = new SqlParameter();
+      SqlParameter clientnameParameter = new SqlParameter();
       clientnameParameter.ParameterName = "@ClientName";
       clientnameParameter.Value = this.GetName();
 
@@ -114,14 +114,14 @@ namespace HairSalon
       stylistIdParameter.ParameterName = "@StylistId";
       stylistIdParameter.Value = this.GetStylistId();
 
-      cmd.Parameters.Add(nameParameter);
+      cmd.Parameters.Add(clientnameParameter);
       cmd.Parameters.Add(stylistIdParameter);
 
       SqlDataReader rdr = cmd.ExecuteReader();
 
       while(rdr.Read())
       {
-        this._clientname = rdr.GetString(0);;
+        this._id = rdr.GetInt32(0);
       }
       if (rdr != null)
       {
@@ -131,8 +131,41 @@ namespace HairSalon
       {
         conn.Close();
       }
-
     }
+    public void Update(string newClientName)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("UPDATE clients SET name = @NewClientName OUTPUT INSERTED.name WHERE id = @ClientId;", conn);
+
+      SqlParameter newNameParameter = new SqlParameter();
+      newClientNameParameter.ParameterName = "@NewClientName";
+      newClientNameParameter.Value = newClientName;
+      cmd.Parameters.Add(newClientNameParameter);
+
+      SqlParameter clientIdParameter = new SqlParameter();
+      clientIdParameter.ParameterName = "@ClientId";
+      clientIdParameter.Value = this.GetId();
+      cmd.Parameters.Add(clientIdParameter);
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      while(rdr.Read())
+      {
+        this._clientname = rdr.GetString(0);
+      }
+
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }
+
 
 
 

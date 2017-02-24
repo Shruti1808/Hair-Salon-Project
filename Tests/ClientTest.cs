@@ -28,3 +28,5 @@ namespace HairSalon
       //Assert
       Assert.Equal(0, result);
     }
+  }
+}

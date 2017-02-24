@@ -83,11 +83,26 @@ namespace HairSalon
 
       //Act
       Client foundClient = Client.Find(testClient.GetId());
-      Console.WriteLine(testClient);
-      Console.WriteLine(foundClient);
 
       //Assert
       Assert.Equal(testClient, foundClient);
+    }
+
+    [Fact]
+    public void Test_DeleteClient_DeletesCuisineFromDatabase()
+    {
+      //Arrange
+      Client testClient = new Client("Beck",1);
+
+      //Act
+      testClient.Save();
+      testClient.Delete();
+
+      //Assert
+      List<Client> testClientList = new List<Client>{};
+      List<Client> result = Client.GetAll();
+
+      Assert.Equal(testClientList,result);
     }
   }
 }

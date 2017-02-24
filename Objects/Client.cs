@@ -137,7 +137,7 @@ namespace HairSalon
       SqlConnection conn = DB.Connection();
       conn.Open();
 
-      SqlCommand cmd = new SqlCommand("UPDATE clients SET name = @NewClientName OUTPUT INSERTED.name WHERE id = @ClientId;", conn);
+      SqlCommand cmd = new SqlCommand("UPDATE clients SET clientname = @NewClientName OUTPUT INSERTED.clientname WHERE id = @ClientId;", conn);
 
       SqlParameter newClientNameParameter = new SqlParameter();
       newClientNameParameter.ParameterName = "@NewClientName";

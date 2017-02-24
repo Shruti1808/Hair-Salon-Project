@@ -44,8 +44,8 @@ Create the database using the following commands in PowerShell's SQLCMD:
 * **GO**
 * **USE hair_salon;**
 * **GO**
-* **CREATE TABLE stylists (id INT IDENTITY(1,1), name VARCHAR(255));**
-* **CREATE TABLE clients (id INT IDENTITY(1,1), name VARCHAR(255), stylist_id INT);**
+* **CREATE TABLE stylists (id INT IDENTITY(1,1), clientname VARCHAR(255));**
+* **CREATE TABLE clients (id INT IDENTITY(1,1), clientname VARCHAR(255), stylist_id INT);**
 * **GO**
 
 ### Known Bugs

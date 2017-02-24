@@ -45,15 +45,15 @@ namespace HairSalon
     public void Test_NewClient_SavesToDatabase()
     {
       //Arrange
-        Client testClient = new Client("Becky", 1);
+      Client testClient = new Client("Becky", 1);
 
-        //Act
-        testClient.Save();
-        List<Client> result = Client.GetAll();
-        List<Client> testList = new List<Client>{testClient};
+      //Act
+      testClient.Save();
+      List<Client> result = Client.GetAll();
+      List<Client> testList = new List<Client>{testClient};
 
-        //Assert
-        Assert.Equal(testList, result);
+      //Assert
+      Assert.Equal(testList, result);
     }
 
     [Fact]
@@ -72,6 +72,22 @@ namespace HairSalon
 
       //Assert
       Assert.Equal(newClientName, result);
+    }
+
+    [Fact]
+    public void Test_Find_FindsClientInDatabase()
+    {
+      //Arrange
+      Client testClient = new Client("Beck",1);
+      testClient.Save();
+
+      //Act
+      Client foundClient = Client.Find(testClient.GetId());
+      Console.WriteLine(testClient);
+      Console.WriteLine(foundClient);
+
+      //Assert
+      Assert.Equal(testClient, foundClient);
     }
   }
 }

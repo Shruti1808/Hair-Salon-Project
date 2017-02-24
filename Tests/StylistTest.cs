@@ -20,23 +20,39 @@ namespace HairSalon
     }
 
     [Fact]
-     public void Test_DatabaseEmptyAtFirst()
-     {
-       //Arrange, Act
-       int result = Stylist.GetAll().Count;
+    public void Test_DatabaseEmptyAtFirst()
+    {
+      //Arrange, Act
+      int result = Stylist.GetAll().Count;
 
-       //Assert
-       Assert.Equal(0, result);
-     }
-     [Fact]
-     public void Test_Equal_ReturnsTrueIfNamesAreTheSame()
-     {
-       //Arrange, Act
-       Stylist firstStylist = new Stylist("Nancy");
-       Stylist secondStylist = new Stylist("Nancy");
+      //Assert
+      Assert.Equal(0, result);
+    }
+    [Fact]
+    public void Test_Equal_ReturnsTrueIfNamesAreTheSame()
+    {
+      //Arrange, Act
+      Stylist firstStylist = new Stylist("Nancy");
+      Stylist secondStylist = new Stylist("Nancy");
 
-       //Assert
-       Assert.Equal(firstStylist, secondStylist);
-     }
-   }
- }
+      //Assert
+      Assert.Equal(firstStylist, secondStylist);
+    }
+
+    [Fact]
+    public void Test_NewStylist_SavesToDatabase()
+    {
+      //Arrange
+      Stylist testStylist = new Stylist("Nancy");
+
+      //Act
+      testStylist.Save();
+      List<Stylist> result = Stylist.GetAll();
+      List<Stylist> testList = new List<Stylist>{testStylist};
+
+
+      //Assert
+      Assert.Equal(testList, result);
+    }
+  }
+}

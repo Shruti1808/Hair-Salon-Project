@@ -7,17 +7,17 @@ namespace HairSalon
   public class Stylist
   {
     private int _id;
-    private string _clientname;
+    private string _name;
 
-    public Stylist(string clientname, int id = 0)
+    public Stylist(string Name, int id = 0)
     {
       _id = id;
-      _clientname = clientname;
+      _name = Name;
     }
 
     public string GetName()
     {
-      return _clientname;
+      return _name;
     }
 
     public int GetId()
@@ -35,8 +35,8 @@ namespace HairSalon
        {
          Stylist newStylist = (Stylist) otherStylist;
          bool idEquality = (this.GetId() == newStylist.GetId());
-         bool stylistnameEquality = (this.GetName() == newStylist.GetName());
-         return (idEquality && stylistnameEquality);
+         bool nameEquality = (this.GetName() == newStylist.GetName());
+         return (idEquality && nameEquality);
        }
      }
 
@@ -77,6 +77,35 @@ namespace HairSalon
       conn.Open();
       SqlCommand cmd = new SqlCommand("DELETE FROM stylists;", conn);
       cmd.ExecuteNonQuery();
+    }
+
+    public void Save()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("INSERT INTO stylists (name) OUTPUT INSERTED.id VALUES (@StylistName);", conn);
+
+      SqlParameter nameParameter = new SqlParameter();
+      nameParameter.ParameterName = "@StylistName";
+      nameParameter.Value = this.GetName();
+
+      cmd.Parameters.Add(nameParameter);
+
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      while(rdr.Read())
+      {
+        this._id = rdr.GetInt32(0);
+      }
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
     }
 
   }

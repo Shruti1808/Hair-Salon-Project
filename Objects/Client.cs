@@ -7,23 +7,23 @@ namespace HairSalon
   public class Client
   {
     private int _id;
-    private string _name;
+    private string _clientname;
     private int _stylistId;
 
-    public Client(string name, int stylistId, int id = 0)
+    public Client(string clientname, int stylistId, int id = 0)
     {
       _id = id;
-      _name = name;
+      _clientname = clientname;
       _stylistId = stylistId;
     }
 
     public string GetName()
     {
-      return _name;
+      return _clientname;
     }
-    public void SetName()
+    public void SetName(string clientname)
     {
-      _name = name;
+      _clientname = clientname;
     }
 
     public int GetId()
@@ -52,10 +52,10 @@ namespace HairSalon
       {
         Client newClient = (Client) otherClient;
         bool idEquality = (this.GetId()== newClient.GetId());
-        bool nameEquality = (this.GetName() == newClient.GetName());
+        bool clientnameEquality = (this.GetName() == newClient.GetName());
         bool stylistIdEquality = (this.GetStylistId()== newClient.GetStylistId());
 
-        return (idEquality && nameEquality && stylistIdEquality);
+        return (idEquality && clientnameEquality && stylistIdEquality);
       }
     }
 
@@ -64,7 +64,7 @@ namespace HairSalon
       List<Client> allClients = new List<Client>{};
 
       SqlConnection conn = DB.Connection();
-      conn.Open;
+      conn.Open();
 
       SqlCommand cmd = new SqlCommand("Select * from clients;", conn);
       SqlDataReader rdr = cmd.ExecuteReader();

@@ -3,6 +3,12 @@
 }
 
 <h1>HairSalon</h1>
+<h1>Add Stylist to @Model.GetName()</h1>
+<form action="/stylists/@Model.GetId()/" method="post">
+  <input type="hidden" name="" value="@Model.GetId()">
+  <label for="Stylist">Your Stylist:</label>
+  <input type="text" name="stylist-name" id="stylist-name">
+</form>
 @if (@Model.Count == 0)
 {
   <p>There are no stylists.</p>
@@ -10,7 +16,7 @@
 <ul>
   @foreach (var stylist in Model)
   {
-    <li><a href="/stylists/@stylists.GetId()">@stylists.GetName()</a></li>
+    <li><a href="/stylists/@Model.GetId()">@Model.GetName()</a></li>
   }
 </ul>
 <a href="/stylists/new">Add new stylist!</a>

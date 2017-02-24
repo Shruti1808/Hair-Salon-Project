@@ -9,8 +9,7 @@ namespace HairSalon
     public HomeModule()
     {
       Get["/"] = _ => {
-
-        return View["index.cshtml",allStylists];
+        return View["index.cshtml"];
       };
 
       Get["/clients"] = _ => {
@@ -18,11 +17,21 @@ namespace HairSalon
         return View["clients.cshtml", AllClients];
       };
 
-      Get["/categories"] = _ => {
+      Get["/stylists"] = _ => {
         List<Stylist> allStylists = Stylist.GetAll();
-        return View["categories.cshtml", AllCategories];
+        return View["stylists.cshtml", allStylists];
       };
-      
+
+      Get["/stylists/{id}"] = parameters => {
+        var SelectedStylist = Stylist.Find(parameters.id);
+        Model.Add("stylist", SelectedStylist);
+        return View["stylists.cshtml",SelectedStylist];
+      };
+
+      Get["/stylists/new"] = _ => {
+        return View["stylists_edit.cshtml"];
+      };
+
     }
   }
 }

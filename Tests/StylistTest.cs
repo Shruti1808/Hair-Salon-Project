@@ -24,7 +24,7 @@ namespace HairSalon
      {
        //Arrange, Act
        int result = Stylist.GetAll().Count;
- 
+
        //Assert
        Assert.Equal(0, result);
      }
@@ -38,3 +38,5 @@ namespace HairSalon
        //Assert
        Assert.Equal(firstStylist, secondStylist);
      }
+   }
+ }

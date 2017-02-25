@@ -1,0 +1,14 @@
+@{
+  Layout="Shared/_Layout.cshtml";
+}
+
+</form>
+<h3>Remove all stylists</h3>
+<form action="/stylists/delete/all" method="post">
+  <input type="hidden" name="_method" value="DELETE">
+  <button type="submit" class="btn btn-primary">Remove all stylists!</button>
+</form>
+
+<h3>All stylists removed.</h3>
+
+<a href="/">Return home</a>

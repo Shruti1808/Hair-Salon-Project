@@ -3,5 +3,36 @@
 }
 
 <h1>Hair Salon</h1>
-<h4><a href="/stylists">View Stylists</a></h4>
-<h4><a href="/clients">View Clients</a></h4>
+<h3>Stylists:</h3>
+
+<h3>Add new stylist:</h3>
+<form action="/stylists/new" method="post">
+  <label for="stylistName">Stylist Name:</label>
+  <input name="stylistName" required>
+
+  <button type="submit" class="btn btn-primary">Add new stylist!</button>
+
+<ul>
+  @if (Model["stylists"].Count != 0)
+  {
+    @foreach (var stylist in Model["stylists"])
+    {
+      <li>
+        <a href="/stylists/@stylist.GetId()">@stylist.GetName()</a>
+        <form action="/stylists/edit/" method="post">
+          <input name="stylistName" value=@stylist.GetId() type="hidden">
+          <button type="submit" class="btn btn-success">Edit</button>
+        </form>
+        <form action="/stylists/delete/" method="post">
+          <input type="hidden" name="_method" value="DELETE">
+          <input name="stylistName" value=@stylist.GetId() type="hidden">
+          <button type="submit" class="btn btn-danger">Remove</button>
+        </form>
+      </li>
+    }
+  }
+  else
+  {
+    <p> No stylists.</p>
+  }
+</ul>

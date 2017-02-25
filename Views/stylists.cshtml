@@ -2,7 +2,7 @@
   Layout="Shared/_Layout.cshtml";
 }
 
-<h1>HairSalon</h1>
+@* <h1>HairSalon</h1>
 <h1>Add Stylist to @Model.GetName()</h1>
 <form action="/stylists/@Model.GetId()/" method="post">
   <input type="hidden" name="" value="@Model.GetId()">
@@ -19,4 +19,4 @@
     <li><a href="/stylists/@Model.GetId()">@Model.GetName()</a></li>
   }
 </ul>
-<a href="/stylists/new">Add new stylist!</a>
+<a href="/stylists/new">Add new stylist!</a> *@

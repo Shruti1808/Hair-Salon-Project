@@ -1,22 +1,39 @@
 @{
   Layout="Shared/_Layout.cshtml";
 }
+<h1>HairSalon</h1>
+<h2>@Model["stylist"].GetName()'s Client List</h2>
 
-@* <h1>HairSalon</h1>
-<h1>Add Stylist to @Model.GetName()</h1>
-<form action="/stylists/@Model.GetId()/" method="post">
-  <input type="hidden" name="" value="@Model.GetId()">
-  <label for="Stylist">Your Stylist:</label>
-  <input type="text" name="stylist-name" id="stylist-name">
-</form>
-@if (@Model.Count == 0)
-{
-  <p>There are no stylists.</p>
-}
 <ul>
-  @foreach (var stylist in Model)
+  if (@Model["clients"].Count != 0)
   {
-    <li><a href="/stylists/@Model.GetId()">@Model.GetName()</a></li>
+    @foreach (var client in Model["clients"])
+    {
+      <li>@client.GetName()
+        <form action='/stylists/@Model["stylist"].GetId()/clients/edit' method='post'>
+          <input name="clientName" value=@client.GetId() type="hidden">
+          <button type="submit" class="btn btn-success">Edit</button>
+        </form>
+        <form action='/stylists/@Model["stylist"].GetId()/clients/delete' method='post'>
+          <input type="hidden" name="_method" value="DELETE">
+          <input name="clientName" value=@client.GetId() type="hidden">
+          <button type="submit" class="btn btn-danger">Remove</button>
+        </form>
+      </li>
+    }
+  }
+  else
+  {
+    <p>No clients.</p>
   }
 </ul>
-<a href="/stylists/new">Add new stylist!</a> *@
+
+<h3>Add new client:</h3>
+<form action='/stylists/@Model["stylist"].GetId()/clients/new' method='post'>
+  <label for="clientName">Client Name:</label>
+  <input name="clientName" required>
+  <input value=@Model["stylist"].GetId() type="hidden">
+  <button type="submit" class="btn btn-primary">Add new client!</button>
+</form>
+
+<a href="/">Return to home</a>

@@ -11,10 +11,8 @@ namespace HairSalon
     {
       Get["/"] = _ => {
         List<Stylist> allStylists = Stylist.GetAll();
-        List<Client> allClients = Client.GetAll();
         Dictionary<string, object> model = new Dictionary<string, object> {};
         model.Add("stylists", allStylists);
-        model.Add("clients", allClients);
         return View["index.cshtml",model];
       };
 

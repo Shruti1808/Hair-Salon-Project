@@ -1,0 +1,14 @@
+@{
+  Layout="Shared/_Layout.cshtml";
+}
+
+<h3>Add new client:</h3>
+<form action="/clients/new" method="post">
+<label for="clientName">Client Name:</label>
+<input id="clientName" name="clientName" type="text" required>
+<input type="hidden" name="stylistId" value="@Model">
+<button type="submit" class="btn btn-primary">Add new client!</button>
+</form>
+
+
+<p><a href="/">Return Home</a></p>

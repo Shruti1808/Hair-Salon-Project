@@ -1,14 +1,19 @@
 @{
-  Layout="Shared/_Layout.cshtml";
+Layout="Shared/_Layout.cshtml";
 }
 
 
-@* <h3>Edit a stylist - editing @Model.GetName()</h3>
+<h2>Edit a stylist: @Model.GetName()</h2>
 
-      <form action="/stylists/@Model.GetId()/edit" method="post">
-        <input type="hidden" name="_method" value="PATCH">
-        <label for="newName">New Stylist Name:</label>
-        <input name="newName" required>
+<form action="/stylists/edit/@Model.GetId()" method="post">
+<div class ="form-group">
+<input type="hidden" name="_method" value="PATCH">
+<input name ="stylist-id" type ="hidden" value = "@Model.GetId()"
+<label for="newName">New Stylist Name:
+<input id= "newName" name="newName" type ="text"></label>
+</div>
 
-        <button type="submit" class="btn btn-success">Edit stylist!</button>
-      </form> *@
+<button type="submit" class="btn btn-success">Edit stylist!</button>
+</form>
+
+<p><a href="/">Return home</a></p>

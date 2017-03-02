@@ -8,9 +8,9 @@ Layout="Shared/_Layout.cshtml";
 <form action="/stylists/edit/@Model.GetId()" method="post">
 <div class ="form-group">
 <input type="hidden" name="_method" value="PATCH">
-<input name ="stylist-id" type ="hidden" value = "@Model.GetId()"
-<label for="newName">New Stylist Name:
-<input id= "newName" name="newName" type ="text"></label>
+<input name ="stylist-id" type ="hidden" value = "@Model.GetId()">
+<label for="newName">New Stylist Name:</label>
+<input id= "newName" name="newName" type ="text">
 </div>
 
 <button type="submit" class="btn btn-success">Edit stylist!</button>

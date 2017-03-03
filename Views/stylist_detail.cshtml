@@ -14,9 +14,10 @@ else
   <ol>
     @foreach (var client in @Model["clientkey"])
     {
-      <li><a href ='client/@client.GetId()'>@client.GetName()</li>
+      <li><a href ='client/@client.GetId()'>@client.GetName()</a> | <a href="/client/edit/@client.GetId()">Edit</a> | <a href="/client/delete/@client.GetId()">Delete</a></li>
     }
   </ol>
 }
 <p><a href="@Model["stylistkey"].GetId()/clients/new">Add a new client</a></p>
+
 <p><a href="/">Return home</a></p>

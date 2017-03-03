@@ -94,7 +94,7 @@ namespace HairSalon
       SqlConnection conn = DB.Connection();
       conn.Open();
 
-      SqlCommand cmd = new SqlCommand("DELETE FROM clients;", conn);
+      SqlCommand cmd = new SqlCommand("DELETE FROM clients", conn);
       cmd.ExecuteNonQuery();
       conn.Close();
     }

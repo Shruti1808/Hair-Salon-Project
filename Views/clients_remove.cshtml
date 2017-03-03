@@ -1,3 +1,22 @@
 @{
   Layout="Shared/_Layout.cshtml";
 }
+
+<hr>
+<h2>Are you sure you want to delete this client?</h2>
+
+
+<h4>@Model.GetName()</h4>
+<form action="/client/delete/@Model.GetId()" method="post">
+  <input type="hidden" name="_method" value="DELETE">
+  <button type="submit" class="btn btn-primary">Delete</button>
+</form>
+
+<form action="/clients/delete" method="post">
+  <input type="hidden" name="_method" value="DELETE">
+  <button type="submit" class="btn btn-primary">Remove all clients!</button>
+</form>
+
+<h3>All stylists removed.</h3>
+
+<a href="/">Return home</a>
